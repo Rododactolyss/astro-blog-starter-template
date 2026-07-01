@@ -1,0 +1,15 @@
+---
+import DnDLayout from "../../layouts/DnDLayout.astro";
+import SpellList from "../../components/react/SpellList";
+---
+
+<DnDLayout title="Spells" activePage="spells">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">✨ Spell Compendium</h1>
+      <p class="page-subtitle">Browse all D&D 5e spells from the System Reference Document</p>
+    </div>
+  </div>
+
+  <SpellList client:load />
+</DnDLayout>

@@ -1,0 +1,63 @@
+---
+import DnDLayout from "../../layouts/DnDLayout.astro";
+import { BACKGROUNDS } from "../../data/equipment";
+---
+
+<DnDLayout title="Backgrounds" activePage="backgrounds">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">📖 Backgrounds</h1>
+      <p class="page-subtitle">Character backgrounds from the Player's Handbook</p>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px;">
+    {BACKGROUNDS.map(bg => (
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title" style="font-size: 18px;">{bg.name}</h2>
+          <span class="badge badge-gold">{bg.feature}</span>
+        </div>
+        <div class="card-body">
+          <p style="font-size: 13px; color: var(--text-secondary); margin: 0 0 14px; line-height: 1.6;">
+            {bg.description}
+          </p>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px;">
+            <div style="background: var(--bg-secondary); padding: 10px; border-radius: 6px;">
+              <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 4px;">Skill Proficiencies</div>
+              <div style="font-size: 13px; font-weight: 600; color: var(--accent-gold-light);">{bg.skillProficiencies.join(", ")}</div>
+            </div>
+            <div style="background: var(--bg-secondary); padding: 10px; border-radius: 6px;">
+              <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 4px;">Languages</div>
+              <div style="font-size: 13px; font-weight: 600;">{bg.languages > 0 ? `${bg.languages} of your choice` : "None"}</div>
+            </div>
+          </div>
+
+          {bg.toolProficiencies.length > 0 && (
+            <div style="margin-bottom: 12px;">
+              <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 4px;">Tool Proficiencies</div>
+              <div style="font-size: 13px; color: var(--text-secondary);">{bg.toolProficiencies.join(", ")}</div>
+            </div>
+          )}
+
+          <div style="background: rgba(184, 150, 12, 0.08); border: 1px solid var(--border-gold); border-radius: 6px; padding: 12px; margin-bottom: 12px;">
+            <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent-gold-light); margin-bottom: 4px;">Feature: {bg.feature}</div>
+            <p style="font-size: 13px; color: var(--text-secondary); margin: 0; line-height: 1.6;">{bg.featureDescription}</p>
+          </div>
+
+          <details>
+            <summary style="cursor: pointer; font-size: 12px; font-weight: 700; color: var(--accent-gold-light); padding: 4px 0; user-select: none;">
+              Starting Equipment
+            </summary>
+            <div style="margin-top: 8px;">
+              <ul style="margin: 0; padding-left: 16px; font-size: 13px; color: var(--text-secondary); line-height: 1.8;">
+                {bg.equipment.map(item => <li>{item}</li>)}
+              </ul>
+            </div>
+          </details>
+        </div>
+      </div>
+    ))}
+  </div>
+</DnDLayout>

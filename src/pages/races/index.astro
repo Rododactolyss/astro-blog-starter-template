@@ -1,0 +1,103 @@
+---
+import DnDLayout from "../../layouts/DnDLayout.astro";
+import { RACES } from "../../data/races";
+
+const RACE_ICONS: Record<string, string> = {
+  dwarf: "⛏️", elf: "🧝", halfling: "🌾", human: "👤",
+  dragonborn: "🐲", gnome: "🔧", "half-elf": "🌙", "half-orc": "⚔️", tiefling: "😈",
+};
+---
+
+<DnDLayout title="Races" activePage="races">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">🧝 Races</h1>
+      <p class="page-subtitle">All D&D 5e playable races from the System Reference Document</p>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px;">
+    {RACES.map(race => (
+      <div class="card">
+        <div class="card-header">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 32px;">{RACE_ICONS[race.id] || "👤"}</span>
+            <div>
+              <h2 class="card-title" style="font-size: 18px;">{race.name}</h2>
+              <div style="font-size: 12px; color: var(--text-secondary);">
+                {race.size} · {race.speed} ft. speed
+              </div>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 4px; align-items: flex-end;">
+            {race.abilityScoreIncreases.slice(0, 2).map(b => b.bonus > 0 && (
+              <span class="badge badge-green">+{b.bonus} {b.ability.slice(0,3).toUpperCase()}</span>
+            ))}
+          </div>
+        </div>
+        <div class="card-body">
+          <p style="font-size: 13px; color: var(--text-secondary); margin: 0 0 12px; line-height: 1.6;">
+            {race.description.slice(0, 200)}...
+          </p>
+
+          <div style="margin-bottom: 12px;">
+            <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 6px;">Ability Score Increases</div>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              {race.abilityScoreIncreases.map(b => b.bonus > 0 && (
+                <span class="badge badge-green">+{b.bonus} {b.ability}</span>
+              ))}
+            </div>
+          </div>
+
+          <div style="margin-bottom: 12px;">
+            <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 6px;">Languages</div>
+            <div style="font-size: 13px; color: var(--text-secondary);">{race.languages.join(", ")}</div>
+          </div>
+
+          <details>
+            <summary style="cursor: pointer; font-size: 12px; font-weight: 700; color: var(--accent-gold-light); padding: 4px 0; user-select: none;">
+              Racial Traits ({race.traits.length})
+            </summary>
+            <div style="margin-top: 8px;">
+              {race.traits.map(t => (
+                <div style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
+                  <div style="font-weight: 700; font-size: 13px; color: var(--accent-gold-light); margin-bottom: 2px;">{t.name}</div>
+                  <p style="font-size: 12px; color: var(--text-secondary); margin: 0; line-height: 1.5;">{t.description}</p>
+                </div>
+              ))}
+            </div>
+          </details>
+
+          {race.subraces && race.subraces.length > 0 && (
+            <details style="margin-top: 8px;">
+              <summary style="cursor: pointer; font-size: 12px; font-weight: 700; color: var(--accent-gold-light); padding: 4px 0; user-select: none;">
+                Subraces ({race.subraces.length})
+              </summary>
+              <div style="margin-top: 8px;">
+                {race.subraces.map(sub => (
+                  <div style="padding: 10px; background: var(--bg-secondary); border-radius: 6px; margin-bottom: 6px;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px;">
+                      <span style="font-weight: 700; font-size: 13px;">{sub.name}</span>
+                      <div style="display: flex; gap: 4px;">
+                        {sub.abilityScoreIncreases.map(b => (
+                          <span class="badge badge-green" style="font-size: 10px;">+{b.bonus} {b.ability.slice(0,3).toUpperCase()}</span>
+                        ))}
+                      </div>
+                    </div>
+                    <p style="font-size: 12px; color: var(--text-secondary); margin: 0 0 6px;">{sub.description}</p>
+                    {sub.traits.map(t => (
+                      <div style="font-size: 12px; margin-top: 4px;">
+                        <span style="font-weight: 700; color: var(--accent-gold-light);">{t.name}:</span>{" "}
+                        <span style="color: var(--text-secondary);">{t.description.slice(0, 100)}...</span>
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </details>
+          )}
+        </div>
+      </div>
+    ))}
+  </div>
+</DnDLayout>

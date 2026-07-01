@@ -1,0 +1,15 @@
+---
+import DnDLayout from "../../layouts/DnDLayout.astro";
+import EquipmentList from "../../components/react/EquipmentList";
+---
+
+<DnDLayout title="Equipment" activePage="equipment">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">⚔️ Equipment</h1>
+      <p class="page-subtitle">Weapons, armor, gear, tools, and magic items</p>
+    </div>
+  </div>
+
+  <EquipmentList client:load />
+</DnDLayout>

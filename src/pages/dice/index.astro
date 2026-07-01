@@ -1,0 +1,15 @@
+---
+import DnDLayout from "../../layouts/DnDLayout.astro";
+import DiceRoller from "../../components/react/DiceRoller";
+---
+
+<DnDLayout title="Dice Roller" activePage="dice">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">🎲 Dice Roller</h1>
+      <p class="page-subtitle">Roll any combination of dice with modifiers, advantage, and disadvantage</p>
+    </div>
+  </div>
+
+  <DiceRoller client:load />
+</DnDLayout>

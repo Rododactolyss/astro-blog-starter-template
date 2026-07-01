@@ -1,0 +1,12 @@
+---
+export const prerender = false;
+
+import DnDLayout from "../../layouts/DnDLayout.astro";
+import CharacterSheet from "../../components/react/CharacterSheet";
+
+const { id } = Astro.params;
+---
+
+<DnDLayout title="Character Sheet" activePage="characters">
+  <CharacterSheet client:load characterId={id!} />
+</DnDLayout>

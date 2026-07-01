@@ -1,0 +1,110 @@
+---
+export interface Props {
+  title?: string;
+  activePage?: string;
+}
+
+const { title = "D&D Beyond", activePage = "" } = Astro.props;
+
+const navLinks = [
+  { href: "/", label: "My Characters", icon: "👤", key: "characters" },
+  { href: "/spells", label: "Spells", icon: "✨", key: "spells" },
+  { href: "/monsters", label: "Monsters", icon: "🐉", key: "monsters" },
+  { href: "/equipment", label: "Equipment", icon: "⚔️", key: "equipment" },
+  { href: "/dice", label: "Dice Roller", icon: "🎲", key: "dice" },
+];
+
+const refLinks = [
+  { href: "/classes", label: "Classes", icon: "📜", key: "classes" },
+  { href: "/races", label: "Races", icon: "🧝", key: "races" },
+  { href: "/backgrounds", label: "Backgrounds", icon: "📖", key: "backgrounds" },
+];
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title} | D&D Beyond</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="/dnd.css" />
+</head>
+<body>
+  <div class="dnd-app">
+    <!-- Header -->
+    <header class="dnd-header">
+      <a href="/" class="dnd-header-logo">
+        <div class="dnd-logo-icon">D&D</div>
+        <span class="dnd-logo-text">D&D <span>Beyond</span></span>
+      </a>
+
+      <nav class="dnd-header-nav">
+        <a href="/" class={`dnd-header-nav-link ${activePage === 'characters' ? 'active' : ''}`}>My Characters</a>
+        <a href="/spells" class={`dnd-header-nav-link ${activePage === 'spells' ? 'active' : ''}`}>Spells</a>
+        <a href="/monsters" class={`dnd-header-nav-link ${activePage === 'monsters' ? 'active' : ''}`}>Monsters</a>
+        <a href="/equipment" class={`dnd-header-nav-link ${activePage === 'equipment' ? 'active' : ''}`}>Equipment</a>
+        <a href="/dice" class={`dnd-header-nav-link ${activePage === 'dice' ? 'active' : ''}`}>Dice Roller</a>
+        <a href="/classes" class={`dnd-header-nav-link ${activePage === 'classes' ? 'active' : ''}`}>Classes</a>
+        <a href="/races" class={`dnd-header-nav-link ${activePage === 'races' ? 'active' : ''}`}>Races</a>
+      </nav>
+
+      <div class="dnd-header-spacer"></div>
+
+      <div class="dnd-header-actions">
+        <a href="/characters/create" class="btn btn-primary btn-sm">
+          ＋ New Character
+        </a>
+      </div>
+    </header>
+
+    <div class="dnd-content">
+      <!-- Sidebar -->
+      <aside class="dnd-sidebar">
+        <div class="dnd-sidebar-section">
+          <div class="dnd-sidebar-label">My Collection</div>
+          {navLinks.map(link => (
+            <a
+              href={link.href}
+              class={`dnd-sidebar-link ${activePage === link.key ? 'active' : ''}`}
+            >
+              <span class="sidebar-icon">{link.icon}</span>
+              {link.label}
+            </a>
+          ))}
+        </div>
+
+        <div class="dnd-sidebar-divider"></div>
+
+        <div class="dnd-sidebar-section">
+          <div class="dnd-sidebar-label">Reference</div>
+          {refLinks.map(link => (
+            <a
+              href={link.href}
+              class={`dnd-sidebar-link ${activePage === link.key ? 'active' : ''}`}
+            >
+              <span class="sidebar-icon">{link.icon}</span>
+              {link.label}
+            </a>
+          ))}
+        </div>
+
+        <div class="dnd-sidebar-divider"></div>
+
+        <div class="dnd-sidebar-section">
+          <div class="dnd-sidebar-label">Tools</div>
+          <a href="/dice" class={`dnd-sidebar-link ${activePage === 'dice' ? 'active' : ''}`}>
+            <span class="sidebar-icon">🎲</span>
+            Dice Roller
+          </a>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="dnd-main">
+        <slot />
+      </main>
+    </div>
+  </div>
+</body>
+</html>

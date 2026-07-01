@@ -1,0 +1,16 @@
+---
+import DnDLayout from "../../layouts/DnDLayout.astro";
+import CharacterBuilder from "../../components/react/CharacterBuilder";
+---
+
+<DnDLayout title="Create Character" activePage="characters">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Character Builder</h1>
+      <p class="page-subtitle">Create a new D&D 5e character step by step</p>
+    </div>
+    <a href="/" class="btn btn-ghost">← My Characters</a>
+  </div>
+
+  <CharacterBuilder client:load />
+</DnDLayout>

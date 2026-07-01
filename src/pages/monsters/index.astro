@@ -1,0 +1,15 @@
+---
+import DnDLayout from "../../layouts/DnDLayout.astro";
+import MonsterList from "../../components/react/MonsterList";
+---
+
+<DnDLayout title="Monsters" activePage="monsters">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">🐉 Monster Manual</h1>
+      <p class="page-subtitle">Complete stat blocks for D&D 5e creatures</p>
+    </div>
+  </div>
+
+  <MonsterList client:load />
+</DnDLayout>
