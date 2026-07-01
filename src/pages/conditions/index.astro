@@ -1,0 +1,14 @@
+---
+import DnDLayout from "../../layouts/DnDLayout.astro";
+import ConditionsPage from "../../components/react/ConditionsPage";
+---
+
+<DnDLayout title="Conditions" activePage="conditions">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">🔴 Conditions</h1>
+      <p class="page-subtitle">All 15 D&D 5e conditions with full rules</p>
+    </div>
+  </div>
+  <ConditionsPage client:load />
+</DnDLayout>

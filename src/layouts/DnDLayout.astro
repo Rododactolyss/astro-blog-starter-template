@@ -11,13 +11,19 @@ const navLinks = [
   { href: "/spells", label: "Spells", icon: "✨", key: "spells" },
   { href: "/monsters", label: "Monsters", icon: "🐉", key: "monsters" },
   { href: "/equipment", label: "Equipment", icon: "⚔️", key: "equipment" },
-  { href: "/dice", label: "Dice Roller", icon: "🎲", key: "dice" },
 ];
 
 const refLinks = [
   { href: "/classes", label: "Classes", icon: "📜", key: "classes" },
   { href: "/races", label: "Races", icon: "🧝", key: "races" },
   { href: "/backgrounds", label: "Backgrounds", icon: "📖", key: "backgrounds" },
+  { href: "/feats", label: "Feats", icon: "⭐", key: "feats" },
+  { href: "/conditions", label: "Conditions", icon: "🔴", key: "conditions" },
+];
+
+const toolLinks = [
+  { href: "/dice", label: "Dice Roller", icon: "🎲", key: "dice" },
+  { href: "/initiative", label: "Initiative Tracker", icon: "⚔️", key: "initiative" },
 ];
 ---
 
@@ -40,13 +46,14 @@ const refLinks = [
       </a>
 
       <nav class="dnd-header-nav">
-        <a href="/" class={`dnd-header-nav-link ${activePage === 'characters' ? 'active' : ''}`}>My Characters</a>
+        <a href="/" class={`dnd-header-nav-link ${activePage === 'characters' ? 'active' : ''}`}>Characters</a>
         <a href="/spells" class={`dnd-header-nav-link ${activePage === 'spells' ? 'active' : ''}`}>Spells</a>
         <a href="/monsters" class={`dnd-header-nav-link ${activePage === 'monsters' ? 'active' : ''}`}>Monsters</a>
         <a href="/equipment" class={`dnd-header-nav-link ${activePage === 'equipment' ? 'active' : ''}`}>Equipment</a>
-        <a href="/dice" class={`dnd-header-nav-link ${activePage === 'dice' ? 'active' : ''}`}>Dice Roller</a>
+        <a href="/initiative" class={`dnd-header-nav-link ${activePage === 'initiative' ? 'active' : ''}`}>Initiative</a>
         <a href="/classes" class={`dnd-header-nav-link ${activePage === 'classes' ? 'active' : ''}`}>Classes</a>
-        <a href="/races" class={`dnd-header-nav-link ${activePage === 'races' ? 'active' : ''}`}>Races</a>
+        <a href="/feats" class={`dnd-header-nav-link ${activePage === 'feats' ? 'active' : ''}`}>Feats</a>
+        <a href="/conditions" class={`dnd-header-nav-link ${activePage === 'conditions' ? 'active' : ''}`}>Conditions</a>
       </nav>
 
       <div class="dnd-header-spacer"></div>
@@ -93,10 +100,15 @@ const refLinks = [
 
         <div class="dnd-sidebar-section">
           <div class="dnd-sidebar-label">Tools</div>
-          <a href="/dice" class={`dnd-sidebar-link ${activePage === 'dice' ? 'active' : ''}`}>
-            <span class="sidebar-icon">🎲</span>
-            Dice Roller
-          </a>
+          {toolLinks.map(link => (
+            <a
+              href={link.href}
+              class={`dnd-sidebar-link ${activePage === link.key ? 'active' : ''}`}
+            >
+              <span class="sidebar-icon">{link.icon}</span>
+              {link.label}
+            </a>
+          ))}
         </div>
       </aside>
 

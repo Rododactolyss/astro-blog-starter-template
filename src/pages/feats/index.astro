@@ -1,0 +1,14 @@
+---
+import DnDLayout from "../../layouts/DnDLayout.astro";
+import FeatsPage from "../../components/react/FeatsPage";
+---
+
+<DnDLayout title="Feats" activePage="feats">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">⭐ Feats</h1>
+      <p class="page-subtitle">All D&D 5e SRD feats — optional character customization</p>
+    </div>
+  </div>
+  <FeatsPage client:load />
+</DnDLayout>

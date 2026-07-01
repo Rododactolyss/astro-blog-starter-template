@@ -1,0 +1,14 @@
+---
+import DnDLayout from "../../layouts/DnDLayout.astro";
+import InitiativeTracker from "../../components/react/InitiativeTracker";
+---
+
+<DnDLayout title="Initiative Tracker" activePage="initiative">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">⚔️ Initiative Tracker</h1>
+      <p class="page-subtitle">Track combat order, HP, and conditions in real time</p>
+    </div>
+  </div>
+  <InitiativeTracker client:load />
+</DnDLayout>
